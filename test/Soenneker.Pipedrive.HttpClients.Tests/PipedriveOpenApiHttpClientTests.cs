@@ -1,20 +1,19 @@
 using Soenneker.Pipedrive.HttpClients.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Pipedrive.HttpClients.Tests;
 
-[Collection("Collection")]
-public sealed class PipedriveOpenApiHttpClientTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class PipedriveOpenApiHttpClientTests : HostedUnitTest
 {
     private readonly IPipedriveOpenApiHttpClient _httpclient;
 
-    public PipedriveOpenApiHttpClientTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public PipedriveOpenApiHttpClientTests(Host host) : base(host)
     {
         _httpclient = Resolve<IPipedriveOpenApiHttpClient>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
