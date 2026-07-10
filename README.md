@@ -10,3 +10,9 @@
 ```
 dotnet add package Soenneker.Pipedrive.HttpClients
 ```
+
+The parameterless `Get()` uses `Pipedrive:ApiKey`. To work with multiple Pipedrive accounts or tenants, pass each API key explicitly:
+
+```csharp
+HttpClient tenantClient = await pipedriveOpenApiHttpClient.Get(tenantApiKey);
+```
