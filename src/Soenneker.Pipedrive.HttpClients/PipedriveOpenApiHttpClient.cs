@@ -17,7 +17,7 @@ namespace Soenneker.Pipedrive.HttpClients;
 public sealed class PipedriveOpenApiHttpClient : IPipedriveOpenApiHttpClient
 {
     private readonly IHttpClientCache _httpClientCache;
-    private readonly string _apiKey;
+    private readonly IConfiguration _configuration;
     private readonly Uri _baseUrl;
     private readonly string _authHeaderName;
     private readonly string _authHeaderValueTemplate;
@@ -28,7 +28,7 @@ public sealed class PipedriveOpenApiHttpClient : IPipedriveOpenApiHttpClient
     public PipedriveOpenApiHttpClient(IHttpClientCache httpClientCache, IConfiguration config)
     {
         _httpClientCache = httpClientCache;
-        _apiKey = config.GetValueStrict<string>("Pipedrive:ApiKey");
+        _configuration = config;
         _baseUrl = new Uri(config["Pipedrive:ClientBaseUrl"] ?? _prodBaseUrl);
         _authHeaderName = config["Pipedrive:AuthHeaderName"] ?? "Authorization";
         _authHeaderValueTemplate = config["Pipedrive:AuthHeaderValueTemplate"] ?? "Bearer {token}";
@@ -36,7 +36,7 @@ public sealed class PipedriveOpenApiHttpClient : IPipedriveOpenApiHttpClient
 
     public ValueTask<HttpClient> Get(CancellationToken cancellationToken = default)
     {
-        return Get(_apiKey, cancellationToken);
+        return Get(_configuration.GetValueStrict<string>("Pipedrive:ApiKey"), cancellationToken);
     }
 
     public ValueTask<HttpClient> Get(string apiKey, CancellationToken cancellationToken = default)
