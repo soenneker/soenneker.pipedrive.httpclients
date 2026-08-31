@@ -6,7 +6,7 @@ using Soenneker.Utils.HttpClientCache.Registrar;
 namespace Soenneker.Pipedrive.HttpClients.Registrars;
 
 /// <summary>
-/// Registers the OpenAPI HttpClient wrapper for dependency injection.
+/// Registers the Pipedrive API HTTP client provider.
 /// </summary>
 public static class PipedriveOpenApiHttpClientRegistrar
 {
