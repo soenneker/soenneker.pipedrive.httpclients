@@ -13,6 +13,7 @@ using Soenneker.Utils.HttpClientCache.Abstract;
 
 namespace Soenneker.Pipedrive.HttpClients;
 
+/// <inheritdoc cref="IPipedriveOpenApiHttpClient" />
 public sealed class PipedriveOpenApiHttpClient : IPipedriveOpenApiHttpClient
 {
     private readonly IHttpClientCache _httpClientCache;
